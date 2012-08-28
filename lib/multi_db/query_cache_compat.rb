@@ -3,7 +3,7 @@ module MultiDb
   module QueryCacheCompat
     def select_all(*a, &b)
       next_reader! unless ConnectionProxy.sticky_slave
-      cache_sql(a.first) {
+      cache_sql(a.first,[]) {
         send_to_current(:select_all, *a, &b)
       }
     end
